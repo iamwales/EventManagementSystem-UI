@@ -1,0 +1,13 @@
+query findAllEvents {
+  events {
+    uuid
+    name
+  }
+}
+
+query findEventByUuid($uuid: ID!) {
+  event(uuid: $uuid) {
+    uuid
+    name
+  }
+}
