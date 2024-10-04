@@ -149,16 +149,16 @@ declare module 'nuxt/schema' {
       cdnURL: string,
    },
 
+   "graphql-client": {
+      clients: any,
+   },
+
    nitro: {
       envPrefix: string,
    },
 
    icon: {
       serverKnownCssClasses: Array<any>,
-   },
-
-   "graphql-client": {
-      clients: any,
    },
   }
   interface PublicRuntimeConfig {
