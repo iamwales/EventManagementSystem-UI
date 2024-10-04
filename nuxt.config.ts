@@ -7,16 +7,5 @@ export default defineNuxtConfig({
     public: {
       GQL_HOST: process.env.GRAPHQL_URL,
     },
-    "graphql-client": {
-      clients: {
-        default: process.env.GRAPHQL_URL,
-      },
-    },
   },
-  // "graphql-client": {
-  //   watch: true,
-  //   autoImport: true,
-  //   functionPrefix: "Gql",
-  //   documentPaths: ["./queries/**/*.graphql"],
-  // },
 });

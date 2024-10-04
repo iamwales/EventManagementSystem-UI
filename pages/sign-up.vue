@@ -80,13 +80,12 @@
                     type="submit"
                     size="xl"
                     class="w-full block text-center"
-                    :loading="loading"
                   >
                     Submit
                   </UButton>
                 </UForm>
               </div>
-              <form class="mt-10">
+              <div class="mt-10">
                 <div class="mt-9 text-center">
                   <p class="text-black-soft text-sm">
                     Already have an account?
@@ -95,7 +94,7 @@
                     >
                   </p>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>
@@ -133,11 +132,10 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
   loading.value = false;
 
   if (signup && signup.register && signup.register.token) {
-    console.log(signup.register.token);
-    setToken(signup.register.token);
-
     const cookie = useCookie("auth_token");
     cookie.value = signup.register.token;
+
+    useGqlToken(signup.register.token);
 
     navigateTo("/dashboard");
   } else {

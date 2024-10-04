@@ -34,8 +34,8 @@
           :disabled="loading"
           :loading="loading"
         >
-          <UFormGroup label="Title" name="title">
-            <UInput v-model="state.title" size="xl" />
+          <UFormGroup label="Title" name="name">
+            <UInput v-model="state.name" size="xl" />
           </UFormGroup>
 
           <UDivider />
@@ -78,7 +78,7 @@ import type { FormSubmitEvent } from "#ui/types";
 const form = ref();
 
 const schema = z.object({
-  title: z
+  name: z
     .string({ required_error: "Please provide event title" })
     .min(3, "Event title should be more than 3 letters")
     .max(30, "Event title should be less than 30 letters"),
@@ -87,11 +87,17 @@ const schema = z.object({
 type Schema = z.output<typeof schema>;
 
 const state = reactive({
-  title: undefined,
+  name: undefined,
 });
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
   console.log(event.data);
+  const newEvent = await GqlCreateEventStart(event.data);
+
+  if (newEvent && newEvent.createEventStart && newEvent.createEventStart.uuid) {
+    // route to edit page
+    navigateTo(`/my-events/${newEvent.createEventStart.uuid}/edit`);
+  }
 }
 
 const isOpen = ref(false);

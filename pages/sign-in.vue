@@ -120,9 +120,10 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
   loading.value = false;
 
   if (register && register.login && register.login.token) {
-    setToken(register.login.token);
     const cookie = useCookie("auth_token");
     cookie.value = register.login.token;
+
+    useGqlToken(register.login.token);
 
     navigateTo("/dashboard");
   } else {

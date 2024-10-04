@@ -55,6 +55,13 @@ export type FindEventByUuidQueryVariables = Exact<{
 
 export type FindEventByUuidQuery = { event?: { uuid: string, name: string } | null };
 
+export type CreateEventStartMutationVariables = Exact<{
+  name: Scalars['String']['input'];
+}>;
+
+
+export type CreateEventStartMutation = { createEventStart?: { uuid: string, name: string } | null };
+
 
 export const RegisterDocument = gql`
     mutation register($email: String!, $password: String!, $firstname: String!, $lastname: String!) {
@@ -91,6 +98,14 @@ export const FindEventByUuidDocument = gql`
   }
 }
     `;
+export const CreateEventStartDocument = gql`
+    mutation createEventStart($name: String!) {
+  createEventStart(name: $name) {
+    uuid
+    name
+  }
+}
+    `;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string, variables?: any) => Promise<T>;
 
@@ -110,6 +125,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     findEventByUuid(variables: FindEventByUuidQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<FindEventByUuidQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<FindEventByUuidQuery>(FindEventByUuidDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'findEventByUuid', 'query', variables);
+    },
+    createEventStart(variables: CreateEventStartMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateEventStartMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateEventStartMutation>(CreateEventStartDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createEventStart', 'mutation', variables);
     }
   };
 }
