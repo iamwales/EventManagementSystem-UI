@@ -348,11 +348,11 @@ const _inlineRuntimeConfig = {
       }
     }
   },
-  "icon": {
-    "serverKnownCssClasses": []
-  },
   "graphql-client": {
     "clients": {}
+  },
+  "icon": {
+    "serverKnownCssClasses": []
   }
 };
 const envOptions = {

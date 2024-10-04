@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="400" height="400">
+  <!-- Background Circle -->
+  <circle cx="100" cy="100" r="90" fill="#009688" />
+
+  <!-- Calendar Icon -->
+  <rect x="45" y="45" width="40" height="40" fill="white" rx="5" />
+  <rect x="45" y="35" width="40" height="10" fill="#00796B" />
+  <line x1="55" y1="35" x2="55" y2="45" stroke="#009688" stroke-width="2" />
+  <line x1="75" y1="35" x2="75" y2="45" stroke="#009688" stroke-width="2" />
+
+  <!-- Clock Icon -->
+  <circle cx="145" cy="70" r="20" fill="white" />
+  <line x1="145" y1="70" x2="145" y2="60" stroke="#009688" stroke-width="2" />
+  <line x1="145" y1="70" x2="150" y2="75" stroke="#009688" stroke-width="2" />
+
+  <!-- Checkmark Icon -->
+  <polyline points="70,130 90,150 130,110" fill="none" stroke="white" stroke-width="5" />
+  
+  <!-- Text -->
+  <text x="100" y="180" font-size="24" text-anchor="middle" fill="white" font-family="Arial">Event Management</text>
+</svg>
