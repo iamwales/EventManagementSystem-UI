@@ -7,7 +7,7 @@
         <EventCard
           v-for="event in events"
           :key="event?.uuid"
-          :title="event.title"
+          :title="event.name"
           :uuid="event.uuid"
           :description="event.description"
           :start-date="event.startDate"
@@ -23,54 +23,31 @@ definePageMeta({
   middleware: "auth",
 });
 
-const myEvents = GqlFindAllEvents();
+const events = useState("events");
+
+console.log("events", events);
 
 // console.log("myEvents", myEvents);
+const getAllEvents = async () => {
+  try {
+    const getEvents = await GqlFindAllEvents();
 
-const events = [
-  {
-    uuid: "test",
-    title: "Events",
-    description: "Lorem islum",
-    startDate: new Date(),
-    endDate: new Date(),
-  },
-  {
-    uuid: "test-1",
-    title: "Events",
-    description: "Lorem islum",
-    startDate: new Date(),
-    endDate: new Date(),
-  },
-  {
-    uuid: "test-2",
-    title: "Events",
-    description: "Lorem islum",
-    startDate: new Date(),
-    endDate: new Date(),
-  },
-  {
-    uuid: "test-3",
-    title: "Events",
-    description: "Lorem islum",
-    startDate: new Date(),
-    endDate: new Date(),
-  },
-  {
-    uuid: "test-4",
-    title: "Events",
-    description: "Lorem islum",
-    startDate: new Date(),
-    endDate: new Date(),
-  },
-  {
-    uuid: "test-5",
-    title: "Events",
-    description: "Lorem islum",
-    startDate: new Date(),
-    endDate: new Date(),
-  },
-];
+    console.log("getEvents", getEvents);
+
+    if (getEvents && getEvents.events) {
+      console.log("I got here");
+      events.value = getEvents.events || [];
+    }
+  } catch (error: any) {
+    console.log("my error", error.statusCode);
+    if (error.statusCode == 403) {
+      // go to sign out
+      navigateTo("/sign-in");
+    }
+  }
+};
+
+getAllEvents();
 </script>
 
 <style></style>

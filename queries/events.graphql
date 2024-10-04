@@ -11,3 +11,10 @@ query findEventByUuid($uuid: ID!) {
     name
   }
 }
+
+mutation createEventStart($name: String!) {
+  createEventStart(name: $name) {
+    uuid
+    name
+  }
+}
